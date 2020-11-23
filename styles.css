@@ -21,3 +21,11 @@
   text-align: center;
   margin: 20px auto;
 }
+.gifs-wrap{
+  display: grid;
+  grid-template-columns: 1fr  1fr 1fr 1fr 1fr;
+
+}
+.gifs-wrap img{
+  width: 100px;
+}
