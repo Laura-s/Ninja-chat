@@ -10,14 +10,15 @@ class Chatroom {
       this.chats = db.collection('chats');
       this.unsub;
     }
-    async addChat(message){
+    async addChat(message, user, type = ''){
       // format a chat object
       const now = new Date();
       const chat = {
-        message: message,
-        username: this.username,
+        message,
+        username: user || this.username,
         room: this.room,
-        created_at: firebase.firestore.Timestamp.fromDate(now)
+        created_at: firebase.firestore.Timestamp.fromDate(now),
+        type,
       };
       // save the chat document
       const response = await this.chats.add(chat);
@@ -41,11 +42,12 @@ class Chatroom {
     }
     updateRoom(room){
       this.room = room;
-      console.log('room updated');
+      // console.log('room updated');
       if(this.unsub){
         this.unsub();
       }
     }
+    
 }
 
 // console.log(chatroom)

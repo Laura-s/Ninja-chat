@@ -8,6 +8,20 @@ const gif = document.querySelector('.find-gif');
 const gifAppKey = "SYLm4Bi57nxl0PqI6AlMRmajZEGcmyVJ";
 const gifWrap = document.querySelector('.gifs-wrap');
 
+const comands = [
+  {
+    trigger: '!cat',
+    answer: 'I am cat'
+  },
+  {
+    trigger: '!dog',
+    answer: 'https://www.twitch.tv/dumbdog'
+  },
+  {
+    trigger: '!help',
+    answer: 'Available comands: !cat, !dog, !help '
+  },
+]
 
 // add a new chat
 newChatForm.addEventListener('submit', e => {
@@ -16,6 +30,12 @@ newChatForm.addEventListener('submit', e => {
   chatroom.addChat(message)
     .then(() => newChatForm.reset())
     .catch(err => console.log(err));
+  const comand = comands.find( comand => comand.trigger == message)
+    console.log(comand)
+  if(comand){
+    console.log('adauga robot')
+    chatroom.addChat(comand.answer, 'CatBot')
+  }
 });
 
 // update the username
@@ -55,7 +75,7 @@ const renderImg = (gif) =>{
 
   img.addEventListener('click', e =>{
     console.log(gif.images.fixed_width.url);
-    chatroom.addChat(gif.images.fixed_width.url)
+    chatroom.addChat(gif.images.fixed_width.url, undefined, 'gif')
   })
   img.src = gif.images.fixed_width.url;
   gifWrap.appendChild(img);
@@ -70,15 +90,8 @@ gif.addEventListener('submit', e =>{
 fetch(`https://api.giphy.com/v1/gifs/search?api_key=${gifAppKey}&q=${gif.gifs.value}&limit=10`)
   .then(response => response.json())
   .then(data => {
-    console.log(data.data)
     data.data.forEach((element)=>{
       renderImg(element)
-      console.log(element)
     })
-
   });
-
-
-  
 })
-
