@@ -2,13 +2,19 @@
   max-width: 600px;
 }
 .btn{
-  background: #56a9b8;
-  color: white;
+  background: #D4C3B5;
+  color: rgb(59, 43, 28);
   outline: none !important;
   box-shadow: none !important;
+  max-height: 38px;
 }
 .btn:focus{
   outline: none !important;
+}
+.btn:hover{
+  background-color: whitesmoke;
+  border: 2px dashed black;
+  max-height: 38px;
 }
 .username{
   font-weight: bold;
@@ -19,9 +25,10 @@
 }
 #chat-window{
   overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
   max-height: 350px;
 }
-
 .update-mssg{
   text-align: center;
   margin: 20px auto;
